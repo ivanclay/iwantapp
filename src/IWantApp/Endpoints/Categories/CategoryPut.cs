@@ -1,4 +1,5 @@
-﻿using IWantApp.Infra.Data;
+﻿using IWantApp.Domain.Products;
+using IWantApp.Infra.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IWantApp.Endpoints.Categories;
@@ -12,19 +13,16 @@ public class CategoryPut
     public static IResult Action([FromRoute] Guid id, CategoryRequest categoryRequest, ApplicationDbContext context) 
     {
         var categorySaved = context.Categories.FirstOrDefault(c => c.Id == id);
-        
+
         if (categorySaved == null)
-        {
-            var errors = categorySaved.Notifications.GroupBy(g => g.Key).ToDictionary(g => g.Key, g => g.Select(x => x.Message).ToArray());
-            return Results.ValidationProblem(errors);
-        }
+            return Results.NotFound();
 
-       categorySaved.Name = categoryRequest.Name;
-       categorySaved.Active = categoryRequest.Active;
-       categorySaved.EditedOn = DateTime.UtcNow;
-       categorySaved.EditedBy = "Test_edit";
+        categorySaved.EditInfo(categoryRequest.Name, categoryRequest.Active);
 
-       context.SaveChanges();
-       return Results.Ok();
+        if(!categorySaved.IsValid)
+            return Results.ValidationProblem(categorySaved.Notifications.ConvertToProblemDetail());
+
+        context.SaveChanges();
+        return Results.Ok();
     }
 }
