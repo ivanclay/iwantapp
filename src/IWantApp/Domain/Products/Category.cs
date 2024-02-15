@@ -10,6 +10,7 @@ public class Category : Entity
     {
         var contract = new Contract<Category>()
             .IsNotNullOrEmpty(name, "Name")
+            .IsGreaterOrEqualsThan(name, 3, "Name")
             .IsNotNullOrEmpty(createdBy, "CreatedBy")
             .IsNotNullOrEmpty(editedBy, "EditedBy");
         AddNotifications(contract);

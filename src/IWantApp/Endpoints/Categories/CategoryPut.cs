@@ -14,7 +14,10 @@ public class CategoryPut
         var categorySaved = context.Categories.FirstOrDefault(c => c.Id == id);
         
         if (categorySaved == null)
-            return Results.NotFound();
+        {
+            var errors = categorySaved.Notifications.GroupBy(g => g.Key).ToDictionary(g => g.Key, g => g.Select(x => x.Message).ToArray());
+            return Results.ValidationProblem(errors);
+        }
 
        categorySaved.Name = categoryRequest.Name;
        categorySaved.Active = categoryRequest.Active;
