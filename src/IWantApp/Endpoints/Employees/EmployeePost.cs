@@ -15,7 +15,7 @@ public class EmployeePost
         var result = userManager.CreateAsync(user, employeeRequest.password).Result;
 
         if(!result.Succeeded)
-            return Results.BadRequest(result.Errors.First());
+            return Results.ValidationProblem(result.Errors.ConvertToProblemDetail());
 
         var userClaims = new List<Claim> 
         {
