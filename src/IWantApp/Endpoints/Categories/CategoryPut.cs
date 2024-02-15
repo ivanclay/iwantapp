@@ -12,16 +12,16 @@ public class CategoryPut
     public static IResult Action([FromRoute] Guid id, CategoryRequest categoryRequest, ApplicationDbContext context) 
     {
         var categorySaved = context.Categories.FirstOrDefault(c => c.Id == id);
-        if (categorySaved != null)
-        {
-            categorySaved.Name = categoryRequest.Name;
-            categorySaved.Active = categoryRequest.Active;
-            categorySaved.EditedOn = DateTime.UtcNow;
-            categorySaved.EditedBy = "Test_edit";
-        }
+        
+        if (categorySaved == null)
+            return Results.NotFound();
 
-        context.SaveChanges();
+       categorySaved.Name = categoryRequest.Name;
+       categorySaved.Active = categoryRequest.Active;
+       categorySaved.EditedOn = DateTime.UtcNow;
+       categorySaved.EditedBy = "Test_edit";
 
-        return Results.Ok();
+       context.SaveChanges();
+       return Results.Ok();
     }
 }

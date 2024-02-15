@@ -11,7 +11,7 @@ public class CategoryPost
 
     public static IResult Action(CategoryRequest categoryRequest, ApplicationDbContext context) 
     {
-        var category = new Category(categoryRequest.Name, "Test-created", "Test-Edited");
+        var category = new Category(categoryRequest.Name, "User-Test-Created", "User-Test-Created");
 
         if(!category.IsValid)
         {
