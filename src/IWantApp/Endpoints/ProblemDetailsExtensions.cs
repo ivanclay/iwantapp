@@ -12,7 +12,7 @@ public static class ProblemDetailsExtensions
                 .ToDictionary(g => g.Key, g => g.Select(x => x.Message).ToArray());
     }
 
-    public static Dictionary<string, string[]> ConvertToProblemDetail(this IEnumerable<IdentityError> errors)
+    public static Dictionary<string, string[]> ConvertToProblemDetails(this IEnumerable<IdentityError> errors)
     {
         var dictionary = new Dictionary<string, string[]>();
         dictionary.Add("Errors", errors.Select(e => e.Description).ToArray());
