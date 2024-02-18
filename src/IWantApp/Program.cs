@@ -54,6 +54,7 @@ builder.Services.AddAuthorization(options =>
 
     options.AddPolicy("EmployeePolicy", p => p.RequireAuthenticatedUser().RequireClaim("EmployeeCode"));
     options.AddPolicy("EmployeePolicy", p => p.RequireAuthenticatedUser().RequireClaim("EmployeeCode", "005"));
+    options.AddPolicy("CPFPolicy", p => p.RequireAuthenticatedUser().RequireClaim("CPF"));
 });
 builder.Services.AddAuthentication(x => 
 {
