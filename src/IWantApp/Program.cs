@@ -55,6 +55,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("EmployeePolicy", p => p.RequireAuthenticatedUser().RequireClaim("EmployeeCode"));
     options.AddPolicy("EmployeePolicy", p => p.RequireAuthenticatedUser().RequireClaim("EmployeeCode", "005"));
     options.AddPolicy("CPFPolicy", p => p.RequireAuthenticatedUser().RequireClaim("CPF"));
+    
 });
 builder.Services.AddAuthentication(x => 
 {
@@ -120,6 +121,7 @@ app.MapMethods(ProductGetShowCase.Template, ProductGetShowCase.Methods, ProductG
 
 // endpoints orders
 app.MapMethods(OrderPost.Template, OrderPost.Methods, OrderPost.Handle);
+app.MapMethods(OrderGet.Template, OrderGet.Methods, OrderGet.Handle);
 
 // endpoints token
 app.MapMethods(TokenPost.Template, TokenPost.Methods, TokenPost.Handle);
