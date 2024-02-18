@@ -2,6 +2,7 @@ using IWantApp.Domain.Users;
 using IWantApp.Endpoints.Categories;
 using IWantApp.Endpoints.Clients;
 using IWantApp.Endpoints.Employees;
+using IWantApp.Endpoints.Orders;
 using IWantApp.Endpoints.Products;
 using IWantApp.Endpoints.Security;
 using IWantApp.Infra.Data;
@@ -115,6 +116,9 @@ app.MapMethods(ClientGet.Template, ClientGet.Methods, ClientGet.Handle);
 app.MapMethods(ProductPost.Template, ProductPost.Methods, ProductPost.Handle);
 app.MapMethods(ProductGetAll.Template, ProductGetAll.Methods, ProductGetAll.Handle);
 app.MapMethods(ProductGetShowCase.Template, ProductGetShowCase.Methods, ProductGetShowCase.Handle);
+
+// endpoints orders
+app.MapMethods(OrderPost.Template, OrderPost.Methods, OrderPost.Handle);
 
 // endpoints token
 app.MapMethods(TokenPost.Template, TokenPost.Methods, TokenPost.Handle);
