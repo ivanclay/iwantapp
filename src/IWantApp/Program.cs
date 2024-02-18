@@ -109,6 +109,7 @@ app.MapMethods(EmployeeGetAll.Template, EmployeeGetAll.Methods, EmployeeGetAll.H
 
 // endpoints clients
 app.MapMethods(ClientPost.Template, ClientPost.Methods, ClientPost.Handle);
+app.MapMethods(ClientGet.Template, ClientGet.Methods, ClientGet.Handle);
 
 // endpoints products
 app.MapMethods(ProductPost.Template, ProductPost.Methods, ProductPost.Handle);
