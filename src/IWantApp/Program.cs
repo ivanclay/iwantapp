@@ -1,4 +1,5 @@
 using IWantApp.Endpoints.Categories;
+using IWantApp.Endpoints.Clients;
 using IWantApp.Endpoints.Employees;
 using IWantApp.Endpoints.Products;
 using IWantApp.Endpoints.Security;
@@ -103,6 +104,9 @@ app.MapMethods(CategoryDelete.Template, CategoryDelete.Methods, CategoryDelete.H
 // endpoints employee
 app.MapMethods(EmployeePost.Template, EmployeePost.Methods, EmployeePost.Handle);
 app.MapMethods(EmployeeGetAll.Template, EmployeeGetAll.Methods, EmployeeGetAll.Handle);
+
+// endpoints clients
+app.MapMethods(ClientPost.Template, ClientPost.Methods, ClientPost.Handle);
 
 // endpoints products
 app.MapMethods(ProductPost.Template, ProductPost.Methods, ProductPost.Handle);
