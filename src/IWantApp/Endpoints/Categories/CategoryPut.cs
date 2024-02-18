@@ -21,7 +21,7 @@ public class CategoryPut
         categorySaved.EditInfo(categoryRequest.Name, categoryRequest.Active, userId);
 
         if(!categorySaved.IsValid)
-            return Results.ValidationProblem(categorySaved.Notifications.ConvertToProblemDetail());
+            return Results.ValidationProblem(categorySaved.Notifications.ConvertToProblemDetails());
 
         context.SaveChanges();
         return Results.Ok();

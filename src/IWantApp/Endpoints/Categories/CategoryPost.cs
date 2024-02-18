@@ -19,7 +19,7 @@ public class CategoryPost
 
         if(!category.IsValid)
         {
-            return Results.ValidationProblem(category.Notifications.ConvertToProblemDetail());
+            return Results.ValidationProblem(category.Notifications.ConvertToProblemDetails());
         }
 
         await context.Categories.AddAsync(category);

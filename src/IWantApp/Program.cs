@@ -1,5 +1,6 @@
 using IWantApp.Endpoints.Categories;
 using IWantApp.Endpoints.Employees;
+using IWantApp.Endpoints.Products;
 using IWantApp.Endpoints.Security;
 using IWantApp.Infra.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -102,6 +103,9 @@ app.MapMethods(CategoryDelete.Template, CategoryDelete.Methods, CategoryDelete.H
 // endpoints employee
 app.MapMethods(EmployeePost.Template, EmployeePost.Methods, EmployeePost.Handle);
 app.MapMethods(EmployeeGetAll.Template, EmployeeGetAll.Methods, EmployeeGetAll.Handle);
+
+// endpoints products
+app.MapMethods(ProductPost.Template, ProductPost.Methods, ProductPost.Handle);
 
 // endpoints token
 app.MapMethods(TokenPost.Template, TokenPost.Methods, TokenPost.Handle);
