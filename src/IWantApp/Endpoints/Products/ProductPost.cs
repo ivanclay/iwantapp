@@ -22,7 +22,7 @@ public class ProductPost
         var category = await context.Categories.FirstOrDefaultAsync(c => c.Id == productRequest.CategoryId);
 
         var product = 
-            new Product(productRequest.Name, category, productRequest.Description, productRequest.HasStock, userAdminId);
+            new Product(productRequest.Name, category, productRequest.Description, productRequest.HasStock, productRequest.Price, userAdminId);
 
         if (!product.IsValid) 
             return Results.ValidationProblem(product.Notifications.ConvertToProblemDetails());
