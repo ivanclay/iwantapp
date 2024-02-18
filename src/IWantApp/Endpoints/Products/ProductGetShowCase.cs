@@ -12,11 +12,10 @@ public class ProductGetShowCase
     public static Delegate Handle => Action;
 
     [AllowAnonymous]
-    public static async Task<IResult> Action(int? page, int? rows, string? orderby, ApplicationDbContext context) 
+    public static async Task<IResult> Action(ApplicationDbContext context, int page = 1, int rows = 10, string orderby = "name") 
     {
-        if (page == null) page = 1;
-        if (rows == null) rows = 10;
-        if (string.IsNullOrEmpty(orderby)) orderby = "name";
+        if (rows > 10)
+            return Results.Problem(title: "Row with max 10", statusCode: 400);
 
         var queryBase = context.Products
             .Include(p => p.Category)
@@ -26,10 +25,12 @@ public class ProductGetShowCase
 
         if (orderby.Equals("name"))
             filterQuery = filterQuery.OrderBy(p => p.Name);
-        else
+        else if (orderby.Equals("price"))
             filterQuery = filterQuery.OrderBy(p => p.Price);
-        
-        filterQuery = filterQuery.Skip((page.Value - 1) * rows.Value).Take(rows.Value);
+        else
+            return Results.Problem(title: "Order only by name or price", statusCode: 400);
+
+        filterQuery = filterQuery.Skip((page - 1) * rows).Take(rows);
 
         var products = filterQuery.ToList();
 
