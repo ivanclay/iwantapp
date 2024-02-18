@@ -18,6 +18,7 @@ public class TokenPost
         LoginRequest loginRequest,
         IConfiguration configuration,
         ILogger<TokenPost> log,
+        IWebHostEnvironment env,
         UserManager<IdentityUser> userManager) 
     {
         log.LogInformation("Getting token");
@@ -47,8 +48,7 @@ public class TokenPost
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
             Audience = configuration["JwtBearerTokenSettings:Audience"],
             Issuer = configuration["JwtBearerTokenSettings:Issuer"],
-            //Expires = DateTime.UtcNow.AddSeconds(30),
-            Expires = DateTime.UtcNow.AddHours(2),
+            Expires = env.IsDevelopment() || env.IsStaging() ? DateTime.UtcNow.AddHours(30) : DateTime.UtcNow.AddMinutes(2),
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();
