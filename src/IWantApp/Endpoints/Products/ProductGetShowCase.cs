@@ -18,6 +18,7 @@ public class ProductGetShowCase
             return Results.Problem(title: "Row with max 10", statusCode: 400);
 
         var queryBase = context.Products
+            .AsNoTracking()
             .Include(p => p.Category)
             .Where(p => p.HasStock && p.Category.Active);
 
